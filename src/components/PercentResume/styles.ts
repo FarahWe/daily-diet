@@ -2,7 +2,7 @@ import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 import { ArrowUpRight } from "phosphor-react-native";
 
-export type PercentResumeStyleProps = "success" | "error";
+type PercentResumeStyleProps = "success" | "error";
 
 type Props = {
   type?: PercentResumeStyleProps;
@@ -18,7 +18,6 @@ export const Container = styled(TouchableOpacity)<Props>`
   border-radius: 8px;
 
   padding: 20px 16px;
-  margin-top: 33px;
 `;
 
 export const Title = styled.Text`

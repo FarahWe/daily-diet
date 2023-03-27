@@ -1,10 +1,4 @@
-import {
-  Container,
-  Icon,
-  PercentResumeStyleProps,
-  Subtitle,
-  Title,
-} from "./styles";
+import { Container, Icon, Subtitle, Title } from "./styles";
 
 type Props = {
   percent: number;
