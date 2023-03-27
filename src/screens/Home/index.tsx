@@ -15,11 +15,7 @@ export function Home() {
         />
       </HomeHeader>
 
-      <PercentResume
-        type="success"
-        title="90,86%"
-        subtitle="das refeições dentro da dieta"
-      />
+      <PercentResume percent={20.88} />
     </Container>
   );
 }

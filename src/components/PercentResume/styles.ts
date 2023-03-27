@@ -1,5 +1,6 @@
 import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
+import { ArrowUpRight } from "phosphor-react-native";
 
 export type PercentResumeStyleProps = "success" | "error";
 
@@ -36,4 +37,13 @@ export const Subtitle = styled.Text`
     font-family: ${theme.font_family.regular};
     font-size: ${theme.font_size.sm}px;
   `}
+`;
+
+export const Icon = styled(ArrowUpRight).attrs<Props>(({ theme, type }) => ({
+  color: type === "success" ? theme.colors.green_dark : theme.colors.red_dark,
+  size: 24,
+}))`
+  position: absolute;
+  top: 8px;
+  right: 8px;
 `;

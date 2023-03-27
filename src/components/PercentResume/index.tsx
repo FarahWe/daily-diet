@@ -1,16 +1,24 @@
-import { Container, PercentResumeStyleProps, Subtitle, Title } from "./styles";
+import {
+  Container,
+  Icon,
+  PercentResumeStyleProps,
+  Subtitle,
+  Title,
+} from "./styles";
 
 type Props = {
-  type?: PercentResumeStyleProps;
-  title: string;
-  subtitle: string;
+  percent: number;
 };
 
-export function PercentResume({ type = "success", subtitle, title }: Props) {
+export function PercentResume({ percent }: Props) {
+  const type = percent > 50 ? "success" : "error";
+
   return (
-    <Container type={type}>
-      <Title>{title}</Title>
-      <Subtitle>{subtitle}</Subtitle>
+    <Container type={type} activeOpacity={0.7}>
+      <Title>{percent}%</Title>
+      <Subtitle>das refeições dentro da dieta</Subtitle>
+
+      <Icon />
     </Container>
   );
 }
