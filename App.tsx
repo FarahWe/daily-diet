@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ThemeProvider } from "styled-components/native";
+import theme from "./src/theme/theme";
+import { useFonts } from "expo-font";
+import { StatusBar } from "react-native";
+import { Loading } from "@components/Loading";
+import { Home } from "@screens/Home";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 export default function App() {
+  const [fontLoaded] = useFonts({
+    "NunitoSans-Bold": require("./assets/fonts/NunitoSans-Bold.ttf"),
+    "NunitoSans-Regular": require("./assets/fonts/NunitoSans-Regular.ttf"),
+  });
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <ThemeProvider theme={theme}>
+        <StatusBar
+          barStyle="dark-content"
+          backgroundColor="transparent"
+          translucent
+        />
+        {fontLoaded ? <Home /> : <Loading />}
+      </ThemeProvider>
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
