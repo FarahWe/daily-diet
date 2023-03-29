@@ -43,3 +43,17 @@ export const Title = styled.Text`
 
   margin-bottom: 8px;
 `;
+
+export const SectionTitle = styled.Text`
+  ${({ theme }) => css`
+    font-family: ${theme.font_family.bold};
+    font-size: ${theme.font_size.lg}px;
+    color: ${theme.colors.gray_1};
+  `}
+
+  margin-bottom: 8px;
+`;
+
+export const SectionItemSeparation = styled.View`
+  margin-bottom: 32px;
+`;
