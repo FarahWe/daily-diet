@@ -3,8 +3,8 @@ import theme from "./src/theme/theme";
 import { useFonts } from "expo-font";
 import { StatusBar } from "react-native";
 import { Loading } from "@components/Loading";
-import { Home } from "@screens/Home";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Routes } from "@routes/index";
 
 export default function App() {
   const [fontLoaded] = useFonts({
@@ -20,7 +20,7 @@ export default function App() {
           backgroundColor="transparent"
           translucent
         />
-        {fontLoaded ? <Home /> : <Loading />}
+        {fontLoaded ? <Routes /> : <Loading />}
       </ThemeProvider>
     </SafeAreaProvider>
   );
