@@ -1,7 +1,16 @@
 import { Header } from "@components/Header";
 import { PercentResume } from "@components/PercentResume";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { BodyContent, Container, Content } from "./styles";
+import {
+  BodyContent,
+  Card,
+  CardContainer,
+  CardSubtitle,
+  CardTitle,
+  Container,
+  Content,
+  Title,
+} from "./styles";
 
 export function Summary() {
   const insets = useSafeAreaInsets();
@@ -16,7 +25,32 @@ export function Summary() {
         <PercentResume percent={99.0} variant="secondary" />
       </Content>
 
-      <BodyContent style={{ paddingBottom: insets.bottom }}></BodyContent>
+      <BodyContent style={{ paddingBottom: insets.bottom }}>
+        <Title>Estatísticas gerais</Title>
+
+        <Card>
+          <CardTitle>22</CardTitle>
+          <CardSubtitle>
+            melhor sequência de pratos dentro da dieta
+          </CardSubtitle>
+        </Card>
+        <Card>
+          <CardTitle>109</CardTitle>
+          <CardSubtitle>refeições registradas</CardSubtitle>
+        </Card>
+
+        <CardContainer>
+          <Card type="success" style={{ flex: 1, marginRight: 12 }}>
+            <CardTitle>99</CardTitle>
+            <CardSubtitle>refeições dentro da dieta</CardSubtitle>
+          </Card>
+
+          <Card type="error" style={{ flex: 1 }}>
+            <CardTitle>10</CardTitle>
+            <CardSubtitle>refeições fora da dieta</CardSubtitle>
+          </Card>
+        </CardContainer>
+      </BodyContent>
     </Container>
   );
 }
