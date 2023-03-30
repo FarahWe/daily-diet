@@ -1,10 +1,11 @@
+import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 
 type Props = {
   is_diet_meal: boolean;
 };
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled(TouchableOpacity)`
   width: 100%;
 
   flex-direction: row;

@@ -14,6 +14,7 @@ import { PercentResume } from "@components/PercentResume";
 import { Button } from "@components/Button";
 import { SectionList } from "react-native";
 import { MealCard } from "@components/MealCard";
+import { useNavigation } from "@react-navigation/native";
 
 const test = [
   {
@@ -85,6 +86,12 @@ const test = [
 ];
 
 export function Home() {
+  const { navigate } = useNavigation();
+
+  function handleSummary() {
+    navigate("summary");
+  }
+
   return (
     <Container>
       <SectionList
@@ -103,7 +110,7 @@ export function Home() {
               />
             </HomeHeader>
 
-            <PercentResume percent={20.88} />
+            <PercentResume percent={99.88} onPress={handleSummary} />
 
             <ButtonContainer>
               <Title>Refeições</Title>

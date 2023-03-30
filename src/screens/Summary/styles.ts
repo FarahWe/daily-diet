@@ -1,23 +1,18 @@
-import { TouchableOpacity } from "react-native";
+import { PercentResumeStyleProps } from "@components/PercentResume/styles";
 import styled, { css } from "styled-components/native";
-import { ArrowUpRight } from "phosphor-react-native";
-
-export type PercentResumeStyleProps = "success" | "error";
 
 type Props = {
   type?: PercentResumeStyleProps;
 };
 
-export const Container = styled(TouchableOpacity)<Props>`
-  width: 100%;
-  align-items: center;
-
+export const Container = styled.View<Props>`
+  flex: 1;
   background-color: ${({ theme, type }) =>
     type === "success" ? theme.colors.green_light : theme.colors.red_light};
+`;
 
-  border-radius: 8px;
-
-  padding: 20px 16px;
+export const Content = styled.View`
+  padding: 24px;
 `;
 
 export const Title = styled.Text`
@@ -38,11 +33,9 @@ export const Subtitle = styled.Text`
   `}
 `;
 
-export const Icon = styled(ArrowUpRight).attrs<Props>(({ theme, type }) => ({
-  color: type === "success" ? theme.colors.green_dark : theme.colors.red_dark,
-  size: 24,
-}))<Props>`
-  position: absolute;
-  top: 8px;
-  right: 8px;
+export const BodyContent = styled.View`
+  background-color: ${({ theme }) => theme.colors.gray_7};
+  flex: 1;
+  border-radius: 20px 0px 0px 20px;
+  padding: 24px;
 `;
