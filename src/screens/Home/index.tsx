@@ -92,6 +92,10 @@ export function Home() {
     navigate("summary");
   }
 
+  function handleNewMeal() {
+    navigate("newMeal");
+  }
+
   return (
     <Container>
       <SectionList
@@ -115,7 +119,11 @@ export function Home() {
             <ButtonContainer>
               <Title>Refeições</Title>
 
-              <Button title="Nova refeição" type="primary" onPress={() => {}} />
+              <Button
+                title="Nova refeição"
+                type="primary"
+                onPress={handleNewMeal}
+              />
             </ButtonContainer>
           </>
         )}
