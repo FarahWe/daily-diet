@@ -1,8 +1,9 @@
 import { TouchableOpacityProps } from "react-native";
-import { Container, PointView, Title, RadioBoxStyleProps } from "./styles";
+import { Container, PointView, Title } from "./styles";
+import { TypeStyleProps } from "src/types/others";
 
 type Props = TouchableOpacityProps & {
-  type: RadioBoxStyleProps;
+  type: TypeStyleProps;
   isSelected?: boolean;
 };
 

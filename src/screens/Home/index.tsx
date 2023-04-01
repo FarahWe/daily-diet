@@ -121,7 +121,7 @@ export function Home() {
 
               <Button
                 title="Nova refeição"
-                type="primary"
+                variant="primary"
                 onPress={handleNewMeal}
               />
             </ButtonContainer>

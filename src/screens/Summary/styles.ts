@@ -1,12 +1,8 @@
-import { PercentResumeStyleProps } from "@components/PercentResume/styles";
+import { TypeStyleProps } from "src/types/others";
 import styled, { css } from "styled-components/native";
 
 type Props = {
-  type?: PercentResumeStyleProps;
-};
-
-type CardProps = {
-  type?: PercentResumeStyleProps;
+  type?: TypeStyleProps;
 };
 
 export const Container = styled.View<Props>`
@@ -37,7 +33,7 @@ export const BodyContent = styled.View`
   padding: 24px;
 `;
 
-export const Card = styled.View<CardProps>`
+export const Card = styled.View<Props>`
   align-items: center;
 
   border-radius: 8px;

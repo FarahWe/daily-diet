@@ -1,15 +1,16 @@
 import { TouchableOpacityProps } from "react-native";
-import { ButtonStyleProps, Container, Icon, Title } from "./styles";
+import { Container, Icon, Title } from "./styles";
+import { VariantStyleProps } from "src/types/others";
 
 type Props = TouchableOpacityProps & {
-  type?: ButtonStyleProps;
+  variant?: VariantStyleProps;
   title: string;
 };
 
-export function Button({ type = "primary", title, onPress }: Props) {
+export function Button({ variant = "primary", title, ...rest }: Props) {
   return (
-    <Container activeOpacity={0.7} onPress={onPress}>
-      {type === "primary" && <Icon />}
+    <Container activeOpacity={0.7} {...rest}>
+      {variant === "primary" && <Icon />}
 
       <Title>{title}</Title>
     </Container>

@@ -1,15 +1,15 @@
+import { TypeStyleProps } from "src/types/others";
 import {
   BackButton,
   BackIcon,
   Container,
-  HeaderStyleProps,
   Title,
   TransparentView,
 } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
 type Props = {
-  type?: HeaderStyleProps;
+  type?: TypeStyleProps;
   title?: string;
 };
 

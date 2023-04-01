@@ -1,11 +1,10 @@
 import { ArrowLeft } from "phosphor-react-native";
 import { TouchableOpacity } from "react-native";
+import { TypeStyleProps } from "src/types/others";
 import styled, { css } from "styled-components/native";
 
-export type HeaderStyleProps = "success" | "error";
-
 type Props = {
-  type?: HeaderStyleProps;
+  type?: TypeStyleProps;
 };
 
 export const Container = styled.View`

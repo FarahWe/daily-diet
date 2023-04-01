@@ -1,11 +1,10 @@
 import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 import { ArrowUpRight } from "phosphor-react-native";
-
-export type PercentResumeStyleProps = "success" | "error";
+import { TypeStyleProps } from "src/types/others";
 
 type Props = {
-  type?: PercentResumeStyleProps;
+  type?: TypeStyleProps;
 };
 
 export const Container = styled(TouchableOpacity)<Props>`

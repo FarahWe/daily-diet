@@ -13,6 +13,7 @@ import { Button } from "@components/Button";
 import { RadioBox } from "@components/RadioBox";
 import { Controller, useForm } from "react-hook-form";
 import { DateInput } from "@components/DateInput";
+import { useNavigation } from "@react-navigation/native";
 
 type FormDataProps = {
   name: string;
@@ -23,6 +24,8 @@ type FormDataProps = {
 };
 
 export function NewMeal() {
+  const { navigate } = useNavigation();
+
   const {
     control,
     register,
@@ -36,7 +39,9 @@ export function NewMeal() {
 
   const insets = useSafeAreaInsets();
 
-  function onSubmit(values: FormDataProps) {}
+  function onSubmit(values: FormDataProps) {
+    navigate("feedback", { type: values.isDietMeal ? "success" : "error" });
+  }
 
   return (
     <Container style={{ paddingTop: insets.top }}>
@@ -127,7 +132,11 @@ export function NewMeal() {
           />
         </Form>
 
-        <Button type="secondary" title="Cadastrar refeição" />
+        <Button
+          onPress={handleSubmit(onSubmit)}
+          variant="secondary"
+          title="Cadastrar refeição"
+        />
       </BodyContent>
     </Container>
   );

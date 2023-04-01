@@ -1,11 +1,10 @@
 import { TouchableOpacity } from "react-native";
+import { TypeStyleProps } from "src/types/others";
 import styled, { css } from "styled-components/native";
-
-export type RadioBoxStyleProps = "success" | "error";
 
 type Props = {
   isSelected?: boolean;
-  type: RadioBoxStyleProps;
+  type: TypeStyleProps;
 };
 
 export const Container = styled(TouchableOpacity)<Props>`

@@ -1,8 +1,9 @@
 import { TouchableOpacityProps } from "react-native";
 import { Container, Icon, Subtitle, Title } from "./styles";
+import { VariantStyleProps } from "src/types/others";
 
 type Props = TouchableOpacityProps & {
-  variant?: "primary" | "secondary";
+  variant?: VariantStyleProps;
   percent: number;
 };
 

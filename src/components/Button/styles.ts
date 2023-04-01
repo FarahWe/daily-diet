@@ -2,12 +2,10 @@ import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 import { Plus } from "phosphor-react-native";
 
-export type ButtonStyleProps = "primary" | "secondary";
-
 export const Container = styled(TouchableOpacity)`
-  width: 100%;
   height: 50px;
 
+  padding: 0 24px;
   align-items: center;
   justify-content: center;
 
