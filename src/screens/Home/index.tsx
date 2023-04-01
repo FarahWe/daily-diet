@@ -21,6 +21,7 @@ const test = [
     title: "29.03.23",
     data: [
       {
+        id: 1,
         name: "X-tudo",
         hour: "20:00",
         description: "X-tudo caprichado demais",
@@ -28,6 +29,7 @@ const test = [
         date: "20:00",
       },
       {
+        id: 1,
         name: "Arroz com frango",
         hour: "20:00",
         description: "X-tudo caprichado demais",
@@ -35,6 +37,7 @@ const test = [
         date: "20:00",
       },
       {
+        id: 1,
         name: "Misto quente",
         hour: "20:00",
         description: "X-tudo caprichado demais",
@@ -42,6 +45,7 @@ const test = [
         date: "20:00",
       },
       {
+        id: 1,
         name: "Macarrão com carne moída",
         hour: "20:00",
         description: "X-tudo caprichado demais",
@@ -54,6 +58,7 @@ const test = [
     title: "29.03.23",
     data: [
       {
+        id: 1,
         name: "X-tudo",
         hour: "20:00",
         date: "20:00",
@@ -61,6 +66,7 @@ const test = [
         is_diet_meal: false,
       },
       {
+        id: 1,
         name: "Arroz com frango",
         hour: "20:00",
         description: "X-tudo caprichado demais",
@@ -68,6 +74,7 @@ const test = [
         date: "20:00",
       },
       {
+        id: 1,
         name: "Misto quente",
         hour: "20:00",
         description: "X-tudo caprichado demais",
@@ -75,6 +82,7 @@ const test = [
         date: "20:00",
       },
       {
+        id: 1,
         name: "Macarrão com carne moída",
         hour: "20:00",
         description: "X-tudo caprichado demais",
@@ -96,13 +104,19 @@ export function Home() {
     navigate("newMeal");
   }
 
+  function handleMealDetails(id: number) {
+    navigate("mealDetails", { id });
+  }
+
   return (
     <Container>
       <SectionList
         sections={test}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => item.name + index}
-        renderItem={({ item }) => <MealCard data={item} />}
+        renderItem={({ item }) => (
+          <MealCard onPress={() => handleMealDetails(item.id)} data={item} />
+        )}
         ListHeaderComponent={() => (
           <>
             <HomeHeader>
@@ -122,6 +136,7 @@ export function Home() {
               <Button
                 title="Nova refeição"
                 variant="primary"
+                icon="plus"
                 onPress={handleNewMeal}
               />
             </ButtonContainer>

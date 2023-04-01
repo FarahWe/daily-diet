@@ -14,10 +14,10 @@ type Props = {
 };
 
 export function Header({ type, title }: Props) {
-  const { navigate } = useNavigation();
+  const { goBack } = useNavigation();
 
   function handleGoBack() {
-    navigate("home");
+    goBack();
   }
 
   return (

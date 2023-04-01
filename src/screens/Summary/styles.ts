@@ -58,7 +58,7 @@ export const CardTitle = styled.Text`
   ${({ theme }) => css`
     color: ${theme.colors.gray_1};
     font-family: ${theme.font_family.bold};
-    font-size: ${theme.font_size.xl}px;
+    font-size: ${theme.font_size.xxl}px;
   `}
 
   margin-bottom: 8px;

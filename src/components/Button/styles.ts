@@ -1,33 +1,41 @@
 import { TouchableOpacity } from "react-native";
+import { VariantStyleProps } from "src/types/others";
 import styled, { css } from "styled-components/native";
-import { Plus } from "phosphor-react-native";
 
-export const Container = styled(TouchableOpacity)`
+type Props = {
+  variant: VariantStyleProps;
+};
+
+export const Container = styled(TouchableOpacity)<Props>`
   height: 50px;
 
   padding: 0 24px;
   align-items: center;
   justify-content: center;
 
-  background-color: ${({ theme }) => theme.colors.gray_2};
+  ${({ theme, variant }) => css`
+    background-color: ${variant === "secondary"
+      ? "transparent"
+      : theme.colors.gray_2};
+    border-width: ${variant === "secondary" && 1}px;
+    border-color: ${variant === "secondary" && theme.colors.gray_1};
+  `}
 
   flex-direction: row;
 
   border-radius: 6px;
 `;
 
-export const Title = styled.Text`
-  ${({ theme }) => css`
+export const Title = styled.Text<Props>`
+  ${({ theme, variant }) => css`
     font-family: ${theme.font_family.bold};
     font-size: ${theme.font_size.sm}px;
-    color: ${theme.colors.white};
+    color: ${variant === "secondary"
+      ? theme.colors.gray_1
+      : theme.colors.white};
   `}
 `;
 
-export const Icon = styled(Plus).attrs(({ theme }) => ({
-  color: theme.colors.white,
-  size: 18,
-  weight: "fill",
-}))`
+export const IconContainer = styled.View`
   margin-right: 12px;
 `;

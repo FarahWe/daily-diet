@@ -132,11 +132,7 @@ export function NewMeal() {
           />
         </Form>
 
-        <Button
-          onPress={handleSubmit(onSubmit)}
-          variant="secondary"
-          title="Cadastrar refeição"
-        />
+        <Button onPress={handleSubmit(onSubmit)} title="Cadastrar refeição" />
       </BodyContent>
     </Container>
   );

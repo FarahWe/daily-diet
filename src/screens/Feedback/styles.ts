@@ -20,7 +20,7 @@ export const Title = styled.Text<Props>`
       ? theme.colors.green_dark
       : theme.colors.red_dark};
 
-    font-size: ${theme.font_size.xl}px;
+    font-size: ${theme.font_size.xxl}px;
   `};
 
   text-align: center;

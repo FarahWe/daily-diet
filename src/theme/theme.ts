@@ -23,7 +23,8 @@ export default {
     sm: 14,
     md: 16,
     lg: 18,
-    xl: 24,
+    xl: 20,
+    xxl: 24,
     "2xl": 32,
   },
   font_family: {

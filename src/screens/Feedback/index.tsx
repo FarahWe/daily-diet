@@ -44,7 +44,6 @@ export function Feedback() {
 
       <Button
         style={{ alignSelf: "center" }}
-        variant="secondary"
         title="Ir para a página inicial"
         onPress={handleGoHome}
       />
