@@ -17,6 +17,8 @@ export function Input({ inputRef, viewStyle, label, ...rest }: Props) {
 
       <ContainerInput
         ref={inputRef}
+        cursorColor={colors.gray_1}
+        selectionColor={colors.gray_1}
         placeholderTextColor={colors.gray_4}
         {...rest}
       />
