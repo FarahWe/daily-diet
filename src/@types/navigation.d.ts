@@ -8,6 +8,7 @@ export declare global {
       newMeal: undefined;
       feedback: { type: TypeStyleProps };
       mealDetails: { id: number };
+      editMeal: { id: number };
     }
   }
 }

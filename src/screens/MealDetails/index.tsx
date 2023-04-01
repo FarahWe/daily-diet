@@ -14,7 +14,7 @@ import {
 } from "./styles";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "@components/Button";
-import { useRoute } from "@react-navigation/native";
+import { useRoute, useNavigation } from "@react-navigation/native";
 
 type RouteParams = {
   id: number;
@@ -23,8 +23,13 @@ type RouteParams = {
 export function MealDetails() {
   const insets = useSafeAreaInsets();
   const route = useRoute();
+  const { navigate } = useNavigation();
 
   const { id } = route.params as RouteParams;
+
+  function handleEditMeal() {
+    navigate("editMeal", { id });
+  }
 
   return (
     <Container type="error" style={{ paddingTop: insets.top }}>
@@ -55,6 +60,7 @@ export function MealDetails() {
 
         <Button
           icon="edit"
+          onPress={handleEditMeal}
           title="Editar refeição"
           style={{ marginBottom: 8 }}
         />

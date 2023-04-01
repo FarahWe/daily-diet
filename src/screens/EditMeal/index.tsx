@@ -1,14 +1,21 @@
-import { Header } from "@components/Header";
+import { useForm } from "react-hook-form";
+import { FormDataProps } from "src/types/others";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BodyContent, Container, Content } from "./styles";
-import { Button } from "@components/Button";
-import { useForm } from "react-hook-form";
-import { useNavigation } from "@react-navigation/native";
-import { FormDataProps } from "src/types/others";
+import { Header } from "@components/Header";
 import { Form } from "@components/Form";
+import { Button } from "@components/Button";
 
-export function NewMeal() {
+type RouteParams = {
+  id: number;
+};
+
+export function EditMeal() {
   const { navigate } = useNavigation();
+  const route = useRoute();
+
+  const { id } = route.params as RouteParams;
 
   const {
     control,
@@ -24,19 +31,19 @@ export function NewMeal() {
   const insets = useSafeAreaInsets();
 
   function onSubmit(values: FormDataProps) {
-    navigate("feedback", { type: values.isDietMeal ? "success" : "error" });
+    navigate("mealDetails", { id });
   }
 
   return (
     <Container style={{ paddingTop: insets.top }}>
       <Content>
-        <Header title="Nova refeição" />
+        <Header title="Editar refeição" />
       </Content>
 
       <BodyContent style={{ paddingBottom: insets.bottom }}>
         <Form control={control} />
 
-        <Button onPress={handleSubmit(onSubmit)} title="Cadastrar refeição" />
+        <Button onPress={handleSubmit(onSubmit)} title="Salvar alterações" />
       </BodyContent>
     </Container>
   );
