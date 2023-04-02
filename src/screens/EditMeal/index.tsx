@@ -6,6 +6,8 @@ import { BodyContent, Container, Content } from "./styles";
 import { Header } from "@components/Header";
 import { Form } from "@components/Form";
 import { Button } from "@components/Button";
+import { mealSchema } from "../../schemas/mealSchema";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 type RouteParams = {
   id: number;
@@ -23,6 +25,7 @@ export function EditMeal() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormDataProps>({
+    resolver: yupResolver(mealSchema),
     defaultValues: {
       isDietMeal: undefined,
     },
@@ -41,7 +44,7 @@ export function EditMeal() {
       </Content>
 
       <BodyContent style={{ paddingBottom: insets.bottom }}>
-        <Form control={control} />
+        <Form control={control} errors={errors} />
 
         <Button onPress={handleSubmit(onSubmit)} title="Salvar alterações" />
       </BodyContent>

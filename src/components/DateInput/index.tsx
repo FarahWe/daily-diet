@@ -2,6 +2,11 @@ import { Container, ContainerInput, Label, Placeholder, Title } from "./styles";
 import { useState } from "react";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import dayjs from "dayjs";
+import {
+  ErrorContainer,
+  ErrorText,
+  WarningIcon,
+} from "@components/Input/styles";
 
 type Props = {
   value: Date;
@@ -10,6 +15,7 @@ type Props = {
   label: string;
   placeholder: string;
   viewStyle?: any;
+  error?: string;
 };
 
 export function DateInput({
@@ -19,6 +25,7 @@ export function DateInput({
   onChange,
   value,
   label,
+  error,
 }: Props) {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
@@ -40,17 +47,27 @@ export function DateInput({
     hideDatePicker();
   };
 
+  const hasError = !!error;
+
   return (
     <Container style={viewStyle} activeOpacity={0.7} onPress={showDatePicker}>
       <Label>{label}</Label>
 
-      <ContainerInput>
+      <ContainerInput hasError={hasError}>
         {!!value ? (
           <Title>{title}</Title>
         ) : (
           <Placeholder>{placeholder}</Placeholder>
         )}
       </ContainerInput>
+
+      {hasError && (
+        <ErrorContainer>
+          <WarningIcon />
+
+          <ErrorText>{error}</ErrorText>
+        </ErrorContainer>
+      )}
 
       <DateTimePickerModal
         isVisible={isDatePickerVisible}

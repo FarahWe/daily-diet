@@ -1,21 +1,24 @@
 import { TouchableOpacity, TextInput } from "react-native";
 import styled, { css } from "styled-components/native";
 
+type Props = {
+  hasError: boolean;
+};
+
 export const Container = styled(TouchableOpacity)`
   width: auto;
   margin-bottom: 24px;
 `;
 
-export const ContainerInput = styled.View`
+export const ContainerInput = styled.View<Props>`
   min-height: 48px;
 
   padding: 14px;
 
-  ${({ theme }) => css`
+  ${({ theme, hasError }) => css`
     background-color: ${theme.colors.gray_7};
-    border-color: ${theme.colors.gray_5};
+    border-color: ${hasError ? theme.colors.red_dark : theme.colors.gray_5};
   `};
-
   border-width: 2px;
   border-radius: 6px;
 `;

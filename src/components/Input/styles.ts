@@ -1,23 +1,28 @@
+import { WarningOctagon } from "phosphor-react-native";
 import { TextInput } from "react-native";
 import styled, { css } from "styled-components/native";
+
+type Props = {
+  hasError: boolean;
+};
 
 export const Container = styled.View`
   width: auto;
   margin-bottom: 24px;
 `;
 
-export const ContainerInput = styled(TextInput)`
+export const ContainerInput = styled(TextInput)<Props>`
   min-height: 48px;
 
   padding: 14px;
 
-  ${({ theme }) => css`
+  ${({ theme, hasError }) => css`
     background-color: ${theme.colors.gray_7};
     color: ${theme.colors.gray_1};
 
     font-family: ${theme.font_family.regular};
     font-size: ${theme.font_size.md}px;
-    border-color: ${theme.colors.gray_5};
+    border-color: ${hasError ? theme.colors.red_dark : theme.colors.gray_5};
   `};
 
   border-width: 2px;
@@ -33,3 +38,24 @@ export const Label = styled.Text`
 
   margin-bottom: 4px;
 `;
+
+export const ErrorContainer = styled.View`
+  margin-top: 4px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ErrorText = styled.Text`
+  ${({ theme }) => css`
+    color: ${theme.colors.red_dark};
+    font-family: ${theme.font_family.bold};
+    font-size: ${theme.font_size.xs}px;
+  `};
+
+  margin-left: 4px;
+`;
+
+export const WarningIcon = styled(WarningOctagon).attrs(({ theme }) => ({
+  size: 16,
+  color: theme.colors.red_dark,
+}))``;

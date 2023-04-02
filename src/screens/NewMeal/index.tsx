@@ -6,16 +6,18 @@ import { useForm } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 import { FormDataProps } from "src/types/others";
 import { Form } from "@components/Form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { mealSchema } from "../../schemas/mealSchema";
 
 export function NewMeal() {
   const { navigate } = useNavigation();
 
   const {
     control,
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormDataProps>({
+    resolver: yupResolver(mealSchema),
     defaultValues: {
       isDietMeal: undefined,
     },
@@ -34,7 +36,7 @@ export function NewMeal() {
       </Content>
 
       <BodyContent style={{ paddingBottom: insets.bottom }}>
-        <Form control={control} />
+        <Form control={control} errors={errors} />
 
         <Button onPress={handleSubmit(onSubmit)} title="Cadastrar refeição" />
       </BodyContent>
