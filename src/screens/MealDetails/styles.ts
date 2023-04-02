@@ -22,10 +22,6 @@ export const BodyContent = styled.View`
   padding: 24px;
 `;
 
-export const MealDetailsContainer = styled.View`
-  flex: 1;
-`;
-
 export const Title = styled.Text`
   ${({ theme }) => css`
     color: ${theme.colors.gray_1};

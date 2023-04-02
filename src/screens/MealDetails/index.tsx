@@ -5,7 +5,6 @@ import {
   Content,
   DateTime,
   Label,
-  MealDetailsContainer,
   Subtitle,
   TagContainer,
   TagPoint,
@@ -15,6 +14,7 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "@components/Button";
 import { useRoute, useNavigation } from "@react-navigation/native";
+import { ScrollView } from "react-native";
 
 type RouteParams = {
   id: number;
@@ -38,7 +38,13 @@ export function MealDetails() {
       </Content>
 
       <BodyContent style={{ paddingBottom: insets.bottom }}>
-        <MealDetailsContainer>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={{ flex: 1 }}
+          contentContainerStyle={{
+            paddingBottom: 100,
+          }}
+        >
           <Title>X-tudo</Title>
           <Subtitle>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde odio
@@ -56,7 +62,7 @@ export function MealDetails() {
 
             <TagTitle>dentro da dieta</TagTitle>
           </TagContainer>
-        </MealDetailsContainer>
+        </ScrollView>
 
         <Button
           icon="edit"

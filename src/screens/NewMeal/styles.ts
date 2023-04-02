@@ -15,3 +15,8 @@ export const BodyContent = styled.View`
   border-radius: 20px 0 0 20px;
   padding: 24px;
 `;
+
+export const Footer = styled.KeyboardAvoidingView`
+  background-color: ${({ theme }) => theme.colors.gray_7};
+  padding: 0 24px;
+`;

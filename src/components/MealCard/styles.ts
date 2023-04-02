@@ -9,6 +9,7 @@ export const Container = styled(TouchableOpacity)`
   width: 100%;
 
   flex-direction: row;
+  align-items: center;
 
   border-radius: 6px;
   border-color: ${({ theme }) => theme.colors.gray_5};

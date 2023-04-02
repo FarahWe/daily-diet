@@ -28,7 +28,7 @@ export const Title = styled.Text<Props>`
 `;
 
 export const Subtitle = styled.Text`
-  ${({ theme }) => css`s
+  ${({ theme }) => css`
     font-family: ${theme.font_family.regular};
     color: ${theme.colors.gray_1};
 
@@ -43,8 +43,7 @@ export const SubtitleSpan = styled.Text`
 `;
 
 export const Image = styled.Image`
-  width: 224px;
-  height: 288px;
+  height: 40%;
 
   margin: 40px 0;
   align-self: center;
