@@ -1,8 +1,8 @@
 export type MealType = {
+  id: number;
   name: string;
   description: string;
-  // TODO: mudar para date
-  date: string; // Date
-  hour: string; // Date
-  is_diet_meal: boolean;
+  date: Date;
+  hour: Date;
+  isDietMeal: boolean;
 };

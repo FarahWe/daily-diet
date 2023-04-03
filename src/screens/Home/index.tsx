@@ -2,99 +2,31 @@ import {
   Avatar,
   ButtonContainer,
   Container,
+  EmptyListText,
   HomeHeader,
   Logo,
   SectionItemSeparation,
   SectionTitle,
   Title,
 } from "./styles";
-
 import logoImg from "@assets/Logo.png";
 import { PercentResume } from "@components/PercentResume";
 import { Button } from "@components/Button";
 import { SectionList } from "react-native";
 import { MealCard } from "@components/MealCard";
-import { useNavigation } from "@react-navigation/native";
-
-const test = [
-  {
-    title: "29.03.23",
-    data: [
-      {
-        id: 1,
-        name: "X-tudo",
-        hour: "20:00",
-        description: "X-tudo caprichado demais",
-        is_diet_meal: false,
-        date: "20:00",
-      },
-      {
-        id: 1,
-        name: "Arroz com frango",
-        hour: "20:00",
-        description: "X-tudo caprichado demais",
-        is_diet_meal: true,
-        date: "20:00",
-      },
-      {
-        id: 1,
-        name: "Misto quente",
-        hour: "20:00",
-        description: "X-tudo caprichado demais",
-        is_diet_meal: true,
-        date: "20:00",
-      },
-      {
-        id: 1,
-        name: "Macarrão com carne moída",
-        hour: "20:00",
-        description: "X-tudo caprichado demais",
-        is_diet_meal: true,
-        date: "20:00",
-      },
-    ],
-  },
-  {
-    title: "29.03.23",
-    data: [
-      {
-        id: 1,
-        name: "X-tudo",
-        hour: "20:00",
-        date: "20:00",
-        description: "X-tudo caprichado demais",
-        is_diet_meal: false,
-      },
-      {
-        id: 1,
-        name: "Arroz com frango",
-        hour: "20:00",
-        description: "X-tudo caprichado demais",
-        is_diet_meal: true,
-        date: "20:00",
-      },
-      {
-        id: 1,
-        name: "Misto quente",
-        hour: "20:00",
-        description: "X-tudo caprichado demais",
-        is_diet_meal: true,
-        date: "20:00",
-      },
-      {
-        id: 1,
-        name: "Macarrão com carne moída",
-        hour: "20:00",
-        description: "X-tudo caprichado demais",
-        is_diet_meal: true,
-        date: "20:00",
-      },
-    ],
-  },
-];
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { useCallback, useState } from "react";
+import { SectionsMealsType } from "src/types/others";
+import { mealsGetAllBySections } from "@storage/Meal/mealsGetAllBySections";
+import { Loading } from "@components/Loading";
+import { mealsPercent } from "@storage/Meal/mealsPercent";
 
 export function Home() {
   const { navigate } = useNavigation();
+
+  const [meals, setMeals] = useState<SectionsMealsType>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [percent, setPercent] = useState(0);
 
   function handleSummary() {
     navigate("summary");
@@ -108,10 +40,44 @@ export function Home() {
     navigate("mealDetails", { id });
   }
 
+  async function fetchMeals() {
+    try {
+      const data = await mealsGetAllBySections();
+      setMeals(data);
+    } catch (error) {
+      // Alert.alert("Turmas", "Não foi possível carregar os grupos.");
+    }
+  }
+
+  async function fetchPercent() {
+    try {
+      const data = await mealsPercent();
+      setPercent(data);
+    } catch (error) {}
+  }
+
+  useFocusEffect(
+    useCallback(() => {
+      try {
+        setIsLoading(true);
+
+        fetchMeals();
+        fetchPercent();
+      } catch (error) {
+      } finally {
+        setIsLoading(false);
+      }
+    }, [])
+  );
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <Container>
       <SectionList
-        sections={test}
+        sections={meals}
         showsVerticalScrollIndicator={false}
         keyExtractor={(item, index) => item.name + index}
         renderItem={({ item }) => (
@@ -128,7 +94,7 @@ export function Home() {
               />
             </HomeHeader>
 
-            <PercentResume percent={99.88} onPress={handleSummary} />
+            <PercentResume percent={percent} onPress={handleSummary} />
 
             <ButtonContainer>
               <Title>Refeições</Title>
@@ -141,6 +107,12 @@ export function Home() {
               />
             </ButtonContainer>
           </>
+        )}
+        ListEmptyComponent={() => (
+          <EmptyListText>
+            Você ainda não tem nenhuma refeição criada! Que tal criar a sua
+            primeira refeição?
+          </EmptyListText>
         )}
         stickySectionHeadersEnabled={false}
         renderSectionHeader={({ section: { title } }) => (

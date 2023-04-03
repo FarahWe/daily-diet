@@ -2,7 +2,7 @@ import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 
 type Props = {
-  is_diet_meal: boolean;
+  isDietMeal: boolean;
 };
 
 export const Container = styled(TouchableOpacity)`
@@ -24,13 +24,15 @@ export const HourTitle = styled.Text`
     font-family: ${theme.font_family.bold};
     font-size: ${theme.font_size.xs}px;
     color: ${theme.colors.gray_1};
-
-    border-color: ${theme.colors.gray_4};
   `}
+`;
 
-  padding-right: 12px;
-  margin-right: 12px;
-  border-right-width: 1px;
+export const Divider = styled.View`
+  margin: 0 12px;
+  height: 100%;
+  width: 1px;
+
+  background-color: ${({ theme }) => theme.colors.gray_3};
 `;
 
 export const MealTitle = styled.Text`
@@ -49,6 +51,6 @@ export const DietMark = styled.View<Props>`
 
   border-radius: 7px;
 
-  background-color: ${({ theme, is_diet_meal }) =>
-    is_diet_meal ? theme.colors.green_mid : theme.colors.red_mid};
+  background-color: ${({ theme, isDietMeal }) =>
+    isDietMeal ? theme.colors.green_mid : theme.colors.red_mid};
 `;

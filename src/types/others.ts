@@ -1,3 +1,5 @@
+import { MealType } from "./meal";
+
 export type VariantStyleProps = "primary" | "secondary";
 
 export type TypeStyleProps = "success" | "error";
@@ -9,3 +11,8 @@ export type FormDataProps = {
   hour: Date;
   isDietMeal: boolean | undefined;
 };
+
+export type SectionsMealsType = {
+  title: string;
+  data: MealType[];
+}[];

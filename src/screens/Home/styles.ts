@@ -57,3 +57,13 @@ export const SectionTitle = styled.Text`
 export const SectionItemSeparation = styled.View`
   margin-bottom: 32px;
 `;
+
+export const EmptyListText = styled.Text`
+  ${({ theme }) => css`
+    font-family: ${theme.font_family.regular};
+    font-size: ${theme.font_size.sm}px;
+    color: ${theme.colors.gray_2};
+  `}
+
+  text-align: center;
+`;

@@ -13,8 +13,13 @@ import {
 } from "./styles";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "@components/Button";
+import { Loading } from "@components/Loading";
 import { useRoute, useNavigation } from "@react-navigation/native";
 import { ScrollView } from "react-native";
+import { useEffect, useState } from "react";
+import { MealType } from "src/types/meal";
+import { mealGetById } from "@storage/Meal/mealGetById";
+import dayjs from "dayjs";
 
 type RouteParams = {
   id: number;
@@ -27,12 +32,37 @@ export function MealDetails() {
 
   const { id } = route.params as RouteParams;
 
+  const [meal, setMeal] = useState<MealType>();
+  const [isLoading, setIsLoading] = useState(true);
+
   function handleEditMeal() {
     navigate("editMeal", { id });
   }
 
+  async function fetchMeal() {
+    try {
+      const data = await mealGetById(id);
+
+      setMeal(data);
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchMeal();
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
-    <Container type="error" style={{ paddingTop: insets.top }}>
+    <Container
+      type={meal?.isDietMeal ? "success" : "error"}
+      style={{ paddingTop: insets.top }}
+    >
       <Content>
         <Header title="Refeição" />
       </Content>
@@ -45,22 +75,22 @@ export function MealDetails() {
             paddingBottom: 100,
           }}
         >
-          <Title>X-tudo</Title>
-          <Subtitle>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde odio
-            illum quibusdam quod voluptate hic id dolores vel nisi numquam
-            voluptas expedita ipsam doloribus laborum quis saepe placeat,
-            eveniet illo?
-          </Subtitle>
+          <Title>{meal?.name}</Title>
+          <Subtitle>{meal?.description}</Subtitle>
 
           <Label>Data e hora</Label>
 
-          <DateTime>22/02/23 ás 22:00</DateTime>
+          <DateTime>
+            {dayjs(meal?.date).format("DD/MM/YYYY")} ás{" "}
+            {dayjs(meal?.hour).format("HH:mm")}
+          </DateTime>
 
           <TagContainer>
-            <TagPoint type="error" />
+            <TagPoint type={meal?.isDietMeal ? "success" : "error"} />
 
-            <TagTitle>dentro da dieta</TagTitle>
+            <TagTitle>
+              {meal?.isDietMeal ? "dentro da dieta" : "fora da dieta"}
+            </TagTitle>
           </TagContainer>
         </ScrollView>
 

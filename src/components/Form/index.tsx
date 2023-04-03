@@ -37,6 +37,8 @@ export function Form({ control, errors }: Props) {
         name="description"
         render={({ field: { value, onChange } }) => (
           <Input
+            value={value}
+            onChangeText={onChange}
             label="Descrição"
             placeholder="Ex: Arroz com Feijão com muita salada e com farofa."
             style={{ height: 120 }}
