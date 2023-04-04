@@ -7,7 +7,7 @@ export declare global {
       summary: { percent: number };
       newMeal: undefined;
       feedback: { type: TypeStyleProps };
-      mealDetails: { id: number };
+      mealDetails: { id?: number };
       editMeal: { id: number };
     }
   }

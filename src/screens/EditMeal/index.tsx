@@ -1,41 +1,43 @@
-import { useForm } from "react-hook-form";
-import { FormDataProps } from "src/types/others";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { BodyContent, Container, Content, Footer } from "./styles";
+import { Container, Content } from "./styles";
 import { Header } from "@components/Header";
-import { Form } from "@components/Form";
-import { Button } from "@components/Button";
-import { mealSchema } from "../../schemas/mealSchema";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Platform, ScrollView } from "react-native";
+import { useEffect, useState } from "react";
+import { Loading } from "@components/Loading";
+import { mealGetById } from "@storage/Meal/mealGetById";
+import { MealType } from "src/types/meal";
+import { EditMealBody } from "./components";
 
 type RouteParams = {
   id: number;
 };
 
 export function EditMeal() {
-  const { navigate } = useNavigation();
   const route = useRoute();
+  const insets = useSafeAreaInsets();
 
   const { id } = route.params as RouteParams;
 
-  const {
-    control,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<FormDataProps>({
-    resolver: yupResolver(mealSchema),
-    defaultValues: {
-      isDietMeal: undefined,
-    },
-  });
+  const [meal, setMeal] = useState<MealType>();
+  const [isLoading, setIsLoading] = useState(true);
 
-  const insets = useSafeAreaInsets();
+  async function fetchMeal() {
+    try {
+      const data = await mealGetById(id);
 
-  function onSubmit(values: FormDataProps) {
-    navigate("mealDetails", { id });
+      setMeal(data);
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchMeal();
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
   }
 
   return (
@@ -44,27 +46,7 @@ export function EditMeal() {
         <Header title="Editar refeição" />
       </Content>
 
-      <BodyContent>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={{ flex: 1 }}
-          contentContainerStyle={{
-            paddingBottom: 100,
-          }}
-        >
-          <Form control={control} errors={errors} />
-        </ScrollView>
-      </BodyContent>
-      <Footer
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        keyboardVerticalOffset={10}
-      >
-        <Button
-          onPress={handleSubmit(onSubmit)}
-          title="Salvar alterações"
-          style={{ marginBottom: insets.bottom !== 0 ? insets.bottom : 24 }}
-        />
-      </Footer>
+      <EditMealBody meal={meal} />
     </Container>
   );
 }

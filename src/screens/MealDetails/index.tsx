@@ -14,9 +14,13 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "@components/Button";
 import { Loading } from "@components/Loading";
-import { useRoute, useNavigation } from "@react-navigation/native";
+import {
+  useRoute,
+  useNavigation,
+  useFocusEffect,
+} from "@react-navigation/native";
 import { ScrollView } from "react-native";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MealType } from "src/types/meal";
 import { mealGetById } from "@storage/Meal/mealGetById";
 import dayjs from "dayjs";
@@ -65,10 +69,11 @@ export function MealDetails() {
     } catch (error) {}
   }
 
-  useEffect(() => {
-    fetchMeal();
-  }, []);
-
+  useFocusEffect(
+    useCallback(() => {
+      fetchMeal();
+    }, [])
+  );
   if (isLoading) {
     return <Loading />;
   }
