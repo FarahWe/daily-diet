@@ -17,6 +17,7 @@ import { SummaryType } from "src/types/summary";
 import { summaryGetAll } from "@storage/Summary/summaryGetAll";
 import { Loading } from "@components/Loading";
 import { useRoute } from "@react-navigation/native";
+import { Alert } from "@components/Alert";
 
 type RouteParams = {
   percent: number;
@@ -30,6 +31,7 @@ export function Summary() {
 
   const [summary, setSummary] = useState<SummaryType>();
   const [isLoading, setIsLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   const type = 100 > 50 ? "success" : "error";
 
@@ -38,6 +40,7 @@ export function Summary() {
       const data = await summaryGetAll();
       setSummary(data);
     } catch (error) {
+      setShowModal(true);
     } finally {
       setIsLoading(false);
     }
@@ -93,6 +96,12 @@ export function Summary() {
           </CardContainer>
         </ScrollView>
       </BodyContent>
+
+      <Alert
+        visible={showModal}
+        setVisible={setShowModal}
+        message="Error em carregar as estatícas da dieta."
+      />
     </Container>
   );
 }

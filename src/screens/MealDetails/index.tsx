@@ -26,6 +26,7 @@ import { mealGetById } from "@storage/Meal/mealGetById";
 import dayjs from "dayjs";
 import { DeleteModal } from "@components/DeleteModal";
 import { mealDelete } from "@storage/Meal/mealDelete";
+import { Alert } from "@components/Alert";
 
 type RouteParams = {
   id: number;
@@ -41,6 +42,7 @@ export function MealDetails() {
   const [meal, setMeal] = useState<MealType>();
   const [isLoading, setIsLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
 
   function handleEditMeal() {
     navigate("editMeal", { id });
@@ -56,6 +58,7 @@ export function MealDetails() {
 
       setMeal(data);
     } catch (error) {
+      setShowAlert(true);
     } finally {
       setIsLoading(false);
     }
@@ -135,6 +138,12 @@ export function MealDetails() {
           onConfirm={handleDeleteMeal}
         />
       )}
+
+      <Alert
+        visible={showAlert}
+        setVisible={setShowAlert}
+        message="Error em carregar a refeição."
+      />
     </Container>
   );
 }

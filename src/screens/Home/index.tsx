@@ -20,6 +20,7 @@ import { SectionsMealsType } from "src/types/others";
 import { mealsGetAllBySections } from "@storage/Meal/mealsGetAllBySections";
 import { Loading } from "@components/Loading";
 import { mealsPercent } from "@storage/Meal/mealsPercent";
+import { Alert } from "@components/Alert";
 
 export function Home() {
   const { navigate } = useNavigation();
@@ -27,6 +28,7 @@ export function Home() {
   const [meals, setMeals] = useState<SectionsMealsType>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [percent, setPercent] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   function handleSummary() {
     navigate("summary", { percent });
@@ -45,7 +47,7 @@ export function Home() {
       const data = await mealsGetAllBySections();
       setMeals(data);
     } catch (error) {
-      // Alert.alert("Turmas", "Não foi possível carregar os grupos.");
+      throw error;
     }
   }
 
@@ -53,7 +55,9 @@ export function Home() {
     try {
       const data = await mealsPercent();
       setPercent(data);
-    } catch (error) {}
+    } catch (error) {
+      throw error;
+    }
   }
 
   useFocusEffect(
@@ -64,6 +68,7 @@ export function Home() {
         fetchMeals();
         fetchPercent();
       } catch (error) {
+        setShowModal(true);
       } finally {
         setIsLoading(false);
       }
@@ -119,6 +124,13 @@ export function Home() {
           <SectionTitle>{title}</SectionTitle>
         )}
         renderSectionFooter={() => <SectionItemSeparation />}
+      />
+
+      <Alert
+        visible={showModal}
+        setVisible={setShowModal}
+        isHome
+        message="Error em carregar lista de refeições, tente novamente mais tarde."
       />
     </Container>
   );

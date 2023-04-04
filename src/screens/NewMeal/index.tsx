@@ -10,6 +10,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { mealSchema } from "../../schemas/mealSchema";
 import { Platform, ScrollView } from "react-native";
 import { mealCreate } from "@storage/Meal/mealCreate";
+import { Alert } from "@components/Alert";
+import { useState } from "react";
 
 export function NewMeal() {
   const { navigate } = useNavigation();
@@ -27,13 +29,15 @@ export function NewMeal() {
 
   const insets = useSafeAreaInsets();
 
+  const [showModal, setShowModal] = useState(false);
+
   async function onSubmit(values: FormDataProps) {
     try {
       await mealCreate(values);
 
       navigate("feedback", { type: values.isDietMeal ? "success" : "error" });
     } catch (error) {
-      // TODO: Fazer modal de alerta
+      setShowModal(true);
     }
   }
 
@@ -63,6 +67,12 @@ export function NewMeal() {
           style={{ marginBottom: insets.bottom !== 0 ? insets.bottom : 24 }}
         />
       </Footer>
+
+      <Alert
+        visible={showModal}
+        setVisible={setShowModal}
+        message="Error em criar a refeição."
+      />
     </Container>
   );
 }

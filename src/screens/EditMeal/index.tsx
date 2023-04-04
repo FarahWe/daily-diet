@@ -7,6 +7,7 @@ import { Loading } from "@components/Loading";
 import { mealGetById } from "@storage/Meal/mealGetById";
 import { MealType } from "src/types/meal";
 import { EditMealBody } from "./components";
+import { Alert } from "@components/Alert";
 
 type RouteParams = {
   id: number;
@@ -20,6 +21,7 @@ export function EditMeal() {
 
   const [meal, setMeal] = useState<MealType>();
   const [isLoading, setIsLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   async function fetchMeal() {
     try {
@@ -27,6 +29,7 @@ export function EditMeal() {
 
       setMeal(data);
     } catch (error) {
+      setShowModal(true);
     } finally {
       setIsLoading(false);
     }
@@ -47,6 +50,11 @@ export function EditMeal() {
       </Content>
 
       <EditMealBody meal={meal} />
+      <Alert
+        visible={showModal}
+        setVisible={setShowModal}
+        message="Error em editar a refeição."
+      />
     </Container>
   );
 }
