@@ -10,7 +10,7 @@ export async function mealCreate(newMeal: FormDataProps) {
     let id = 1;
 
     if (!!storagedMeals[storagedMeals.length - 1]) {
-      id += 1;
+      id = storagedMeals[storagedMeals.length - 1].id + 1;
     }
 
     const storage = JSON.stringify([...storagedMeals, { ...newMeal, id }]);
