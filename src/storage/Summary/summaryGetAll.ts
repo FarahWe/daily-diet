@@ -1,4 +1,5 @@
 import { mealsGetAll } from "@storage/Meal/mealsGetAll";
+import dayjs from "dayjs";
 import { SummaryType } from "src/types/summary";
 
 export async function summaryGetAll() {
@@ -10,13 +11,9 @@ export async function summaryGetAll() {
       (meal) => !meal.isDietMeal
     ).length;
 
-    const sortedMeals = storagedMeals.sort((meal1, meal2) => {
-      if (meal1.date !== meal2.date) {
-        return meal1.date < meal2.date ? -1 : 1;
-      } else {
-        return meal1.hour < meal2.hour ? -1 : 1;
-      }
-    });
+    const sortedMeals = storagedMeals.sort(
+      (meal1, meal2) => dayjs(meal2.hour).unix() - dayjs(meal1.hour).unix()
+    );
 
     let currentSequenceLength = 0;
     let longestSequenceLength = 0;

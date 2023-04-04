@@ -34,7 +34,6 @@ export async function mealsGetAllBySections() {
         dayjs(b.title, "DD.MM.YYYY").unix() -
         dayjs(a.title, "DD.MM.YYYY").unix()
     );
-    console.log(storage);
 
     return sections;
   } catch (error) {
