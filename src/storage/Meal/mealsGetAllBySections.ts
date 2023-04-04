@@ -12,7 +12,11 @@ export async function mealsGetAllBySections() {
 
     let sections: SectionsMealsType = [];
 
-    meals.forEach((meal) => {
+    const sortedMeals = meals.sort(
+      (meal1, meal2) => dayjs(meal2.hour).unix() - dayjs(meal1.hour).unix()
+    );
+
+    sortedMeals.forEach((meal) => {
       const date = dayjs(meal.date).format("DD.MM.YYYY");
       let sectionIndex = sections.findIndex(
         (section) => section.title === date
@@ -25,15 +29,12 @@ export async function mealsGetAllBySections() {
         });
       } else {
         sections[sectionIndex].data.push(meal);
+
+        sections[sectionIndex].data.sort(
+          (a, b) => dayjs(a.hour).unix() - dayjs(b.hour).unix()
+        );
       }
     });
-
-    // Ordena as seções em ordem decrescente de data
-    sections.sort(
-      (a, b) =>
-        dayjs(b.title, "DD.MM.YYYY").unix() -
-        dayjs(a.title, "DD.MM.YYYY").unix()
-    );
 
     return sections;
   } catch (error) {

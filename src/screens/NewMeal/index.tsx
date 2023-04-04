@@ -30,7 +30,6 @@ export function NewMeal() {
   async function onSubmit(values: FormDataProps) {
     try {
       await mealCreate(values);
-      console.log(values);
 
       navigate("feedback", { type: values.isDietMeal ? "success" : "error" });
     } catch (error) {
