@@ -20,6 +20,8 @@ import { useEffect, useState } from "react";
 import { MealType } from "src/types/meal";
 import { mealGetById } from "@storage/Meal/mealGetById";
 import dayjs from "dayjs";
+import { DeleteModal } from "@components/DeleteModal";
+import { mealDelete } from "@storage/Meal/mealDelete";
 
 type RouteParams = {
   id: number;
@@ -34,9 +36,14 @@ export function MealDetails() {
 
   const [meal, setMeal] = useState<MealType>();
   const [isLoading, setIsLoading] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   function handleEditMeal() {
     navigate("editMeal", { id });
+  }
+
+  function handleShowModal() {
+    setShowModal(true);
   }
 
   async function fetchMeal() {
@@ -48,6 +55,14 @@ export function MealDetails() {
     } finally {
       setIsLoading(false);
     }
+  }
+
+  async function handleDeleteMeal() {
+    try {
+      await mealDelete(id);
+
+      navigate("home");
+    } catch (error) {}
   }
 
   useEffect(() => {
@@ -76,7 +91,7 @@ export function MealDetails() {
           }}
         >
           <Title>{meal?.name}</Title>
-          <Subtitle>{meal?.description}</Subtitle>
+          {meal?.description && <Subtitle>{meal?.description}</Subtitle>}
 
           <Label>Data e hora</Label>
 
@@ -101,8 +116,20 @@ export function MealDetails() {
           style={{ marginBottom: 8 }}
         />
 
-        <Button variant="secondary" icon="delete" title="Excluir refeição" />
+        <Button
+          variant="secondary"
+          icon="delete"
+          title="Excluir refeição"
+          onPress={handleShowModal}
+        />
       </BodyContent>
+      {showModal && (
+        <DeleteModal
+          visible={showModal}
+          setVisible={setShowModal}
+          onConfirm={handleDeleteMeal}
+        />
+      )}
     </Container>
   );
 }

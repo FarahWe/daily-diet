@@ -7,7 +7,8 @@ type Props = {
 };
 
 export const Container = styled(TouchableOpacity)<Props>`
-  height: 50px;
+  min-height: 50px;
+  max-height: 50px;
 
   padding: 0 24px;
   align-items: center;

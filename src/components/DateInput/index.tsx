@@ -74,6 +74,7 @@ export function DateInput({
         mode={type}
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
+        maximumDate={type === "date" ? new Date() : undefined}
       />
     </Container>
   );
