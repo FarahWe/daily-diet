@@ -12,18 +12,51 @@ import {
   Title,
 } from "./styles";
 import { ScrollView } from "react-native";
+import { useEffect, useState } from "react";
+import { SummaryType } from "src/types/summary";
+import { summaryGetAll } from "@storage/Summary/summaryGetAll";
+import { Loading } from "@components/Loading";
+import { useRoute } from "@react-navigation/native";
+
+type RouteParams = {
+  percent: number;
+};
 
 export function Summary() {
   const insets = useSafeAreaInsets();
+  const route = useRoute();
+
+  const { percent } = route.params as RouteParams;
+
+  const [summary, setSummary] = useState<SummaryType>();
+  const [isLoading, setIsLoading] = useState(true);
 
   const type = 100 > 50 ? "success" : "error";
+
+  async function fetchSummary() {
+    try {
+      const data = await summaryGetAll();
+      setSummary(data);
+    } catch (error) {
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchSummary();
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Container type={type} style={{ paddingTop: insets.top }}>
       <Content>
         <Header type={type} />
 
-        <PercentResume percent={99.0} variant="secondary" />
+        <PercentResume percent={percent} variant="secondary" />
       </Content>
 
       <BodyContent style={{ paddingBottom: insets.bottom }}>
@@ -37,24 +70,24 @@ export function Summary() {
           <Title>Estatísticas gerais</Title>
 
           <Card>
-            <CardTitle>22</CardTitle>
+            <CardTitle>{summary?.bestStrike}</CardTitle>
             <CardSubtitle>
               melhor sequência de pratos dentro da dieta
             </CardSubtitle>
           </Card>
           <Card>
-            <CardTitle>109</CardTitle>
+            <CardTitle>{summary?.mealsCreated}</CardTitle>
             <CardSubtitle>refeições registradas</CardSubtitle>
           </Card>
 
           <CardContainer>
             <Card type="success" style={{ flex: 1, marginRight: 12 }}>
-              <CardTitle>99</CardTitle>
+              <CardTitle>{summary?.mealsOnDiet}</CardTitle>
               <CardSubtitle>refeições dentro da dieta</CardSubtitle>
             </Card>
 
             <Card type="error" style={{ flex: 1 }}>
-              <CardTitle>10</CardTitle>
+              <CardTitle>{summary?.mealsNotOnDiet}</CardTitle>
               <CardSubtitle>refeições fora da dieta</CardSubtitle>
             </Card>
           </CardContainer>

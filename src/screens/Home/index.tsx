@@ -29,7 +29,7 @@ export function Home() {
   const [percent, setPercent] = useState(0);
 
   function handleSummary() {
-    navigate("summary");
+    navigate("summary", { percent });
   }
 
   function handleNewMeal() {
