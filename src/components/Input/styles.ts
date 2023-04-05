@@ -1,5 +1,5 @@
-import { WarningOctagon } from "phosphor-react-native";
 import { TextInput } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import styled, { css } from "styled-components/native";
 
 type Props = {
@@ -55,7 +55,8 @@ export const ErrorText = styled.Text`
   margin-left: 4px;
 `;
 
-export const WarningIcon = styled(WarningOctagon).attrs(({ theme }) => ({
+export const WarningIcon = styled(Ionicons).attrs(({ theme }) => ({
   size: 16,
   color: theme.colors.red_dark,
+  name: "alert-circle-outline",
 }))``;

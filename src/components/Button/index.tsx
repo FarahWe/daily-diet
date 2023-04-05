@@ -1,7 +1,7 @@
 import { TouchableOpacityProps } from "react-native";
 import { Container, IconContainer, Title } from "./styles";
 import { VariantStyleProps } from "src/types/others";
-import { PencilSimpleLine, Plus, Trash } from "phosphor-react-native";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useTheme } from "styled-components/native";
 
 type Props = TouchableOpacityProps & {
@@ -15,11 +15,19 @@ export function Button({ variant = "primary", title, icon, ...rest }: Props) {
 
   const Icon =
     icon === "plus" ? (
-      <Plus size={18} color={colors.white} />
+      <MaterialCommunityIcons size={18} color={colors.white} name="plus" />
     ) : icon === "edit" ? (
-      <PencilSimpleLine size={18} color={colors.white} />
+      <MaterialCommunityIcons
+        size={18}
+        color={colors.white}
+        name="pencil-outline"
+      />
     ) : (
-      <Trash size={18} color={colors.gray_1} />
+      <MaterialCommunityIcons
+        size={18}
+        color={colors.gray_1}
+        name="trash-can-outline"
+      />
     );
 
   return (

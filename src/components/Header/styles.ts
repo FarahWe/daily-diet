@@ -1,4 +1,4 @@
-import { ArrowLeft } from "phosphor-react-native";
+import { AntDesign } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { TypeStyleProps } from "src/types/others";
 import styled, { css } from "styled-components/native";
@@ -25,7 +25,7 @@ export const BackButton = styled(TouchableOpacity)`
   flex: 1;
 `;
 
-export const BackIcon = styled(ArrowLeft).attrs<Props>(({ theme, type }) => ({
+export const BackIcon = styled(AntDesign).attrs<Props>(({ theme, type }) => ({
   size: 24,
   color:
     type === "success"
@@ -33,6 +33,7 @@ export const BackIcon = styled(ArrowLeft).attrs<Props>(({ theme, type }) => ({
       : type === "error"
       ? theme.colors.red_dark
       : theme.colors.gray_2,
+  name: "arrowleft",
 }))<Props>``;
 
 export const TransparentView = styled.View`

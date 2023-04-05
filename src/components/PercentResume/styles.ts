@@ -1,7 +1,7 @@
 import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
-import { ArrowUpRight } from "phosphor-react-native";
 import { TypeStyleProps } from "src/types/others";
+import Feather from "@expo/vector-icons/Feather";
 
 type Props = {
   type?: TypeStyleProps;
@@ -37,9 +37,10 @@ export const Subtitle = styled.Text`
   `}
 `;
 
-export const Icon = styled(ArrowUpRight).attrs<Props>(({ theme, type }) => ({
+export const Icon = styled(Feather).attrs<Props>(({ theme, type }) => ({
   color: type === "success" ? theme.colors.green_dark : theme.colors.red_dark,
   size: 24,
+  name: "arrow-up-right",
 }))<Props>`
   position: absolute;
   top: 8px;
