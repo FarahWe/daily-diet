@@ -42,7 +42,7 @@ export function DateInput({
   const { colors } = useTheme();
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-  const [selectDate, setSelectDate] = useState<Date | undefined>();
+  const [selectDate, setSelectDate] = useState<Date | undefined>(new Date());
 
   const title =
     type === "date"

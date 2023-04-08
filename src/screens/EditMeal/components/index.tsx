@@ -29,8 +29,10 @@ export function EditMealBody({ meal }: Props) {
     defaultValues: {
       isDietMeal: meal?.isDietMeal,
       description: meal?.description,
-      date: meal?.date,
-      hour: meal?.hour,
+      //@ts-ignore
+      date: new Date(meal?.date),
+      //@ts-ignore
+      hour: new Date(meal?.hour),
       name: meal?.name,
     },
   });

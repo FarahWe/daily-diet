@@ -56,7 +56,7 @@ export function Form({ control, errors }: Props) {
             <DateInput
               type="date"
               label="Data"
-              value={new Date(value)}
+              value={value}
               onChange={onChange}
               placeholder="Ex: 20/02/2023"
               error={errors.date?.message}
@@ -71,7 +71,7 @@ export function Form({ control, errors }: Props) {
             <DateInput
               type="time"
               label="Hora"
-              value={new Date(value)}
+              value={value}
               onChange={onChange}
               placeholder="Ex: 10:00"
               viewStyle={{ flex: 1 }}
