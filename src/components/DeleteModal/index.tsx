@@ -24,6 +24,7 @@ export function DeleteModal({ visible, setVisible, onConfirm }: Props) {
       <NativeModal
         visible={visible}
         transparent
+        statusBarTranslucent
         onRequestClose={hideModal}
         animationType="slide"
       >

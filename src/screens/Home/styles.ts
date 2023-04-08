@@ -22,10 +22,9 @@ export const Logo = styled.Image`
 export const Avatar = styled.Image`
   width: 40px;
   height: 40px;
-
-  border-radius: 20px;
   border-width: 2px;
   border-color: ${({ theme }) => theme.colors.gray_2};
+  border-radius: 20px;
 `;
 
 export const ButtonContainer = styled.View`

@@ -12,7 +12,9 @@ export const Content = styled.View`
 export const BodyContent = styled.View`
   background-color: ${({ theme }) => theme.colors.gray_7};
   flex: 1;
-  border-radius: 20px 0 0 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
   padding: 24px;
 `;
 

@@ -17,10 +17,12 @@ export const ContainerInput = styled.View<Props>`
 
   ${({ theme, hasError }) => css`
     background-color: ${theme.colors.gray_7};
-    border-color: ${hasError ? theme.colors.red_dark : theme.colors.gray_5};
+    border: 2px ${hasError ? theme.colors.red_dark : theme.colors.gray_5};
   `};
-  border-width: 2px;
-  border-radius: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
 `;
 
 export const Title = styled.Text`
@@ -47,4 +49,34 @@ export const Label = styled.Text`
   `};
 
   margin-bottom: 4px;
+`;
+
+export const CenteredModal = styled(TouchableOpacity)`
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: rgba(0, 0, 0, 0.25);
+`;
+
+export const ModalView = styled.View`
+  background-color: ${({ theme }) => theme.colors.gray_7};
+  width: 100%;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+`;
+
+export const ButtonsContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+
+  margin-top: 28px;
 `;

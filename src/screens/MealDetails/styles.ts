@@ -18,7 +18,9 @@ export const Content = styled.View`
 export const BodyContent = styled.View`
   background-color: ${({ theme }) => theme.colors.gray_7};
   flex: 1;
-  border-radius: 20px 0 0 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
   padding: 24px;
 `;
 
@@ -66,9 +68,12 @@ export const TagContainer = styled.View`
   padding: 8px 16px;
   flex-direction: row;
   align-items: center;
-  align-self: right;
+  align-self: flex-start;
 
-  border-radius: 9999px;
+  border-top-left-radius: 9999px;
+  border-top-right-radius: 9999px;
+  border-bottom-right-radius: 9999px;
+  border-bottom-left-radius: 9999px;
 
   background-color: ${({ theme }) => theme.colors.gray_6};
 `;
@@ -76,7 +81,10 @@ export const TagContainer = styled.View`
 export const TagPoint = styled.View<Props>`
   width: 8px;
   height: 8px;
-  border-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
 
   margin-right: 8px;
   background-color: ${({ theme, type }) =>

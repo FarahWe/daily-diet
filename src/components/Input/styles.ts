@@ -20,13 +20,15 @@ export const ContainerInput = styled(TextInput)<Props>`
     background-color: ${theme.colors.gray_7};
     color: ${theme.colors.gray_1};
 
+    border: 2px ${hasError ? theme.colors.red_dark : theme.colors.gray_5};
     font-family: ${theme.font_family.regular};
     font-size: ${theme.font_size.md}px;
-    border-color: ${hasError ? theme.colors.red_dark : theme.colors.gray_5};
   `};
 
-  border-width: 2px;
-  border-radius: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
 `;
 
 export const Label = styled.Text`

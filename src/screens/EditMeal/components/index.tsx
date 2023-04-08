@@ -63,7 +63,9 @@ export function EditMealBody({ meal }: Props) {
         <Button
           onPress={handleSubmit(onSubmit)}
           title="Salvar alterações"
-          style={{ marginBottom: insets.bottom !== 0 ? insets.bottom : 24 }}
+          style={{
+            marginBottom: insets.bottom !== 0 ? insets.bottom + 24 : 24,
+          }}
         />
       </Footer>
     </>

@@ -50,6 +50,7 @@ export function EditMeal() {
       </Content>
 
       <EditMealBody meal={meal} />
+
       <Alert
         visible={showModal}
         setVisible={setShowModal}

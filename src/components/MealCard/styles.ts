@@ -11,9 +11,11 @@ export const Container = styled(TouchableOpacity)`
   flex-direction: row;
   align-items: center;
 
-  border-radius: 6px;
-  border-color: ${({ theme }) => theme.colors.gray_5};
-  border-width: 1px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border: 1px ${({ theme }) => theme.colors.gray_5};
 
   padding: 14px 16px 14px 12px;
   margin-bottom: 8px;
@@ -49,7 +51,10 @@ export const DietMark = styled.View<Props>`
   height: 14px;
   width: 14px;
 
-  border-radius: 7px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
 
   background-color: ${({ theme, isDietMeal }) =>
     isDietMeal ? theme.colors.green_mid : theme.colors.red_mid};

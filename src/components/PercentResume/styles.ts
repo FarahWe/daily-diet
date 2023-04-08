@@ -14,7 +14,10 @@ export const Container = styled(TouchableOpacity)<Props>`
   background-color: ${({ theme, type }) =>
     type === "success" ? theme.colors.green_light : theme.colors.red_light};
 
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
 
   padding: 20px 16px;
 `;

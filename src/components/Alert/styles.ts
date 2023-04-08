@@ -15,7 +15,10 @@ export const ModalView = styled.View`
   height: 190px;
   background-color: ${({ theme }) => theme.colors.gray_7};
   width: 100%;
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
 
   align-items: center;
   justify-content: center;
@@ -30,6 +33,6 @@ export const Title = styled.Text`
     font-size: ${theme.font_size.lg}px;
   `};
 
-  margin-bottom: 24px
+  margin-bottom: 24px;
   text-align: center;
 `;

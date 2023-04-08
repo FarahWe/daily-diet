@@ -29,14 +29,19 @@ export const Title = styled.Text`
 export const BodyContent = styled.View`
   background-color: ${({ theme }) => theme.colors.gray_7};
   flex: 1;
-  border-radius: 20px 0 0 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
   padding: 24px;
 `;
 
 export const Card = styled.View<Props>`
   align-items: center;
 
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
   width: 100%;
 
   background-color: ${({ theme, type }) =>

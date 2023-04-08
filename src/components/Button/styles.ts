@@ -18,13 +18,16 @@ export const Container = styled(TouchableOpacity)<Props>`
     background-color: ${variant === "secondary"
       ? "transparent"
       : theme.colors.gray_2};
-    border-width: ${variant === "secondary" && 1}px;
-    border-color: ${variant === "secondary" && theme.colors.gray_1};
+    border: ${variant === "secondary" && "1px"}
+      ${variant === "secondary" && theme.colors.gray_1};
   `}
 
   flex-direction: row;
 
-  border-radius: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
 `;
 
 export const Title = styled.Text<Props>`

@@ -1,17 +1,29 @@
-import { Container, ContainerInput, Label, Placeholder, Title } from "./styles";
-import { useState } from "react";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import {
+  Container,
+  ContainerInput,
+  Label,
+  Placeholder,
+  Title,
+  CenteredModal,
+  ModalView,
+  ButtonsContainer,
+} from "./styles";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import {
   ErrorContainer,
   ErrorText,
   WarningIcon,
 } from "@components/Input/styles";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { useTheme } from "styled-components/native";
+import { Modal, Platform } from "react-native";
+import { Button } from "@components/Button";
 
 type Props = {
   value: Date;
   type: "date" | "time";
-  onChange: (date: Date) => void;
+  onChange: (date: Date | undefined) => void;
   label: string;
   placeholder: string;
   viewStyle?: any;
@@ -27,7 +39,10 @@ export function DateInput({
   label,
   error,
 }: Props) {
+  const { colors } = useTheme();
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [selectDate, setSelectDate] = useState<Date | undefined>();
 
   const title =
     type === "date"
@@ -40,11 +55,6 @@ export function DateInput({
 
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
-  };
-
-  const handleConfirm = (date: Date) => {
-    onChange(date);
-    hideDatePicker();
   };
 
   const hasError = !!error;
@@ -69,13 +79,66 @@ export function DateInput({
         </ErrorContainer>
       )}
 
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode={type}
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
-        maximumDate={type === "date" ? new Date() : undefined}
-      />
+      {Platform.OS === "android" ? (
+        isDatePickerVisible && (
+          <DateTimePicker
+            value={value ?? new Date()}
+            mode={type}
+            positiveButton={{ label: "OK", textColor: colors.gray_1 }}
+            negativeButton={{ label: "Cancelar", textColor: colors.gray_1 }}
+            is24Hour={true}
+            maximumDate={type === "date" ? new Date() : undefined}
+            onChange={(_, date) => {
+              hideDatePicker();
+
+              onChange(date);
+            }}
+          />
+        )
+      ) : (
+        <Modal
+          visible={isDatePickerVisible}
+          transparent
+          statusBarTranslucent
+          onRequestClose={hideDatePicker}
+          animationType="slide"
+        >
+          <CenteredModal onPress={hideDatePicker}>
+            <ModalView>
+              <DateTimePicker
+                display="spinner"
+                value={value ?? new Date()}
+                mode={type}
+                positiveButton={{ label: "OK", textColor: colors.gray_1 }}
+                negativeButton={{ label: "Cancelar", textColor: colors.gray_1 }}
+                is24Hour={true}
+                maximumDate={type === "date" ? new Date() : undefined}
+                onChange={(_, date) => {
+                  setSelectDate(date);
+                }}
+              />
+
+              <ButtonsContainer>
+                <Button
+                  style={{ flex: 1, marginRight: 12 }}
+                  title="Cancelar"
+                  variant="secondary"
+                  onPress={hideDatePicker}
+                />
+                <Button
+                  style={{ flex: 1 }}
+                  title="Ok"
+                  onPress={() => {
+                    hideDatePicker();
+
+                    onChange(selectDate);
+                  }}
+                />
+              </ButtonsContainer>
+            </ModalView>
+          </CenteredModal>
+        </Modal>
+      )}
     </Container>
   );
 }

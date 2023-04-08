@@ -3,7 +3,6 @@ import theme from "./src/theme/theme";
 import { useFonts } from "expo-font";
 import { StatusBar } from "react-native";
 import { Loading } from "@components/Loading";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Routes } from "@routes/index";
 
 export default function App() {
@@ -13,15 +12,13 @@ export default function App() {
   });
 
   return (
-    <SafeAreaProvider>
-      <ThemeProvider theme={theme}>
-        <StatusBar
-          barStyle="dark-content"
-          backgroundColor="transparent"
-          translucent
-        />
-        {fontLoaded ? <Routes /> : <Loading />}
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <ThemeProvider theme={theme}>
+      <StatusBar
+        barStyle="dark-content"
+        translucent
+        backgroundColor="transparent"
+      />
+      {fontLoaded ? <Routes /> : <Loading />}
+    </ThemeProvider>
   );
 }

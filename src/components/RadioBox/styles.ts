@@ -10,8 +10,10 @@ type Props = {
 export const Container = styled(TouchableOpacity)<Props>`
   height: 48px;
   width: 100%;
-  padding: 16px;
-  border-radius: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -22,18 +24,19 @@ export const Container = styled(TouchableOpacity)<Props>`
       : type === "success"
       ? theme.colors.green_light
       : theme.colors.red_light};
-    border-color: ${type === "success"
-      ? theme.colors.green_dark
-      : theme.colors.red_dark};
 
-    border-width: ${isSelected && 1}px;
+    border: ${isSelected ? "1px" : "0px"} solid
+      ${type === "success" ? theme.colors.green_dark : theme.colors.red_dark};
   `};
 `;
 
 export const PointView = styled.View<Props>`
   width: 8px;
   height: 8px;
-  border-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
   margin-right: 8px;
   background-color: ${({ theme, type }) =>
     type === "success" ? theme.colors.green_dark : theme.colors.red_dark};

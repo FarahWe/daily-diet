@@ -25,6 +25,7 @@ export function Alert({ visible, setVisible, message, isHome = false }: Props) {
       <Modal
         visible={visible}
         transparent
+        statusBarTranslucent
         onRequestClose={hideModal}
         animationType="slide"
       >

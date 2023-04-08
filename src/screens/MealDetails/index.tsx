@@ -90,7 +90,9 @@ export function MealDetails() {
         <Header title="Refeição" />
       </Content>
 
-      <BodyContent style={{ paddingBottom: insets.bottom }}>
+      <BodyContent
+        style={{ paddingBottom: insets.bottom !== 0 ? insets.bottom + 24 : 24 }}
+      >
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{ flex: 1 }}
